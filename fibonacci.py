@@ -9,15 +9,14 @@ def fibo_seq(num):
     elif num == 2:
         print(a,b)
     else:
-        umm.append(a)
-        umm.append(b)
+        umm.append(str(a))
+        umm.append(str(b))
         for i in range(0,num - 2):
-            umm.append(a+b)
+            umm.append(str(a+b))
             c = a+b
             a = b
             b = c
-        umm = str(umm)
-    return umm
+    return " ".join(umm)
 
 print(fibo_seq(8))
 
