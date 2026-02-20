@@ -1,0 +1,48 @@
+import json
+
+def find_json_paths(data, target_key, current_path=""):
+    paths = []
+    
+    # If the current data is a Dictionary (JSON Object)
+    if isinstance(data, dict):
+        for key, value in data.items():
+            # Build the dot-notation path
+            new_path = f"{current_path}.{key}" if current_path else key
+            
+            # If we found the key, add it to our list
+            if key == target_key:
+                paths.append(new_path)
+                
+            # Keep digging deeper
+            paths.extend(find_json_paths(value, target_key, new_path))
+            
+    # If the current data is a List (JSON Array)
+    elif isinstance(data, list):
+        for index, item in enumerate(data):
+            # Use bracket notation for arrays
+            new_path = f"{current_path}[{index}]"
+            paths.extend(find_json_paths(item, target_key, new_path))
+            
+    return paths
+
+# --- Example Usage ---
+sample_json = {
+    "data": {
+        "customer": {
+            "id": 123,
+            "displayName": "John Doe",
+            "orders": [
+                {"id": 1, "displayName": "Order 1"}
+            ]
+        }
+    }
+}
+
+target = "id"
+results = find_json_paths(sample_json, target)
+
+for path in results:
+    print(path) 
+    # Output: 
+    # data.customer.displayName
+    # data.customer.orders[0].displayName
