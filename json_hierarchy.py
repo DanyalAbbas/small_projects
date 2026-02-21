@@ -1,6 +1,6 @@
 import json
 
-def find_json_paths(data, target_key, current_path=""):
+def find_json_paths(data, target_key : str, current_path : str = "") -> list:
     paths = []
     
     # If the current data is a Dictionary (JSON Object)
@@ -25,18 +25,6 @@ def find_json_paths(data, target_key, current_path=""):
             
     return paths
 
-# --- Example Usage ---
-sample_json = {
-    "data": {
-        "customer": {
-            "id": 123,
-            "displayName": "John Doe",
-            "orders": [
-                {"id": 1, "displayName": "Order 1"}
-            ]
-        }
-    }
-}
 
 target = "FreeFormNumber"
 with open("smt.json", "r") as f:
@@ -58,6 +46,3 @@ some = "QueryResponse.Customer*Fax.FreeFormNumber"
 i, j = some.split("*")
 print(i)
 print(j)
-    # Output: 
-    # data.customer.displayName
-    # data.customer.orders[0].displayName
