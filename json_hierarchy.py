@@ -43,8 +43,21 @@ with open("smt.json", "r") as f:
     json_data = json.load(f)
 results = find_json_paths(json_data, target)
 
+exists = []
 for path in results:
-    print(path) 
+    start = path.find("[")
+    if start != -1:
+        end = path.find("]", start)
+        path = path[:start] + "*"+ path[end+2:]
+    if path not in exists:
+        print(path)
+    exists.append(path)
+
+
+some = "QueryResponse.Customer*Fax.FreeFormNumber"
+i, j = some.split("*")
+print(i)
+print(j)
     # Output: 
     # data.customer.displayName
     # data.customer.orders[0].displayName
