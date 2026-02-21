@@ -38,8 +38,10 @@ sample_json = {
     }
 }
 
-target = "id"
-results = find_json_paths(sample_json, target)
+target = "FreeFormNumber"
+with open("smt.json", "r") as f:
+    json_data = json.load(f)
+results = find_json_paths(json_data, target)
 
 for path in results:
     print(path) 
